@@ -1,4 +1,4 @@
-package net.minestatus.minequery;
+package com.johnymuffin.beta.legacyping;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
