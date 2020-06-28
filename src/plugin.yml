@@ -1,4 +1,4 @@
 name: LegacyPing
 description: A basic server that serves server info, fork of MineQuery
-main: net.minestatus.minequery.Minequery
+main: com.johnymuffin.beta.legacyping.LegacyPing
 version: 1.0.0

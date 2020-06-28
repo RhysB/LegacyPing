@@ -18,7 +18,7 @@ public final class QueryServer extends Thread {
 	/**
 	 * The parent plugin object.
 	 */
-	private final Minequery minequery;
+	private final LegacyPing legacyPing;
 
 	/**
 	 * The host that the server will listen on.
@@ -43,15 +43,15 @@ public final class QueryServer extends Thread {
 	/**
 	 * Creates a new <code>QueryServer</code> object.
 	 * 
-	 * @param minequery
+	 * @param legacyPing
 	 *            The parent plugin object
 	 * @param port
 	 *            The port that this server will run on
 	 * @throws IOException
 	 *             If an I/O error occurs
 	 */
-	public QueryServer(Minequery minequery, String host, int port) throws IOException {
-		this.minequery = minequery;
+	public QueryServer(LegacyPing legacyPing, String host, int port) throws IOException {
+		this.legacyPing = legacyPing;
 		this.host = host;
 		this.port = port;
 
@@ -76,7 +76,7 @@ public final class QueryServer extends Thread {
 				Socket socket = getListener().accept();
 
 				// Create a new thread to handle the request.
-				(new Thread(new Request(getMinequery(), socket))).start();
+				(new Thread(new Request(getLegacyPing(), socket))).start();
 			}
 		} catch (IOException ex) {
 			log.info("Stopping Minequery server");
@@ -88,8 +88,8 @@ public final class QueryServer extends Thread {
 	 * 
 	 * @return The Minequery object
 	 */
-	public Minequery getMinequery() {
-		return minequery;
+	public LegacyPing getLegacyPing() {
+		return legacyPing;
 	}
 
 	/**
