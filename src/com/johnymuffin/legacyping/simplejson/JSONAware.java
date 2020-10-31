@@ -1,4 +1,4 @@
-package com.johnymuffin.beta.legacyping.simplejson;
+package com.johnymuffin.legacyping.simplejson;
 
 /**
  * Beans that support customized output of JSON text shall implement this interface.  

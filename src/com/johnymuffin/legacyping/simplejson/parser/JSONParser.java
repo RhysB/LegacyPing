@@ -2,10 +2,10 @@
  * $Id: JSONParser.java,v 1.1 2006/04/15 14:10:48 platform Exp $
  * Created on 2006-4-15
  */
-package com.johnymuffin.beta.legacyping.simplejson.parser;
+package com.johnymuffin.legacyping.simplejson.parser;
 
-import com.johnymuffin.beta.legacyping.simplejson.JSONArray;
-import com.johnymuffin.beta.legacyping.simplejson.JSONObject;
+import com.johnymuffin.legacyping.simplejson.JSONArray;
+import com.johnymuffin.legacyping.simplejson.JSONObject;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -57,7 +57,7 @@ public class JSONParser {
      * 
      * @param in - The new character reader.
      * @throws IOException
-     * @throws com.johnymuffin.beta.legacyping.simplejson.parser.ParseException
+     * @throws ParseException
      */
 	public void reset(Reader in){
 		lexer.yyreset(in);
@@ -71,11 +71,11 @@ public class JSONParser {
 		return lexer.getPosition();
 	}
 	
-	public Object parse(String s) throws com.johnymuffin.beta.legacyping.simplejson.parser.ParseException {
+	public Object parse(String s) throws ParseException {
 		return parse(s, (ContainerFactory)null);
 	}
 	
-	public Object parse(String s, ContainerFactory containerFactory) throws com.johnymuffin.beta.legacyping.simplejson.parser.ParseException {
+	public Object parse(String s, ContainerFactory containerFactory) throws ParseException {
 		StringReader in=new StringReader(s);
 		try{
 			return parse(in, containerFactory);
@@ -84,11 +84,11 @@ public class JSONParser {
 			/*
 			 * Actually it will never happen.
 			 */
-			throw new com.johnymuffin.beta.legacyping.simplejson.parser.ParseException(-1, com.johnymuffin.beta.legacyping.simplejson.parser.ParseException.ERROR_UNEXPECTED_EXCEPTION, ie);
+			throw new ParseException(-1, ParseException.ERROR_UNEXPECTED_EXCEPTION, ie);
 		}
 	}
 	
-	public Object parse(Reader in) throws IOException, com.johnymuffin.beta.legacyping.simplejson.parser.ParseException {
+	public Object parse(Reader in) throws IOException, ParseException {
 		return parse(in, (ContainerFactory)null);
 	}
 	
@@ -106,9 +106,9 @@ public class JSONParser {
 	 * 	null
 	 * 
 	 * @throws IOException
-	 * @throws com.johnymuffin.beta.legacyping.simplejson.parser.ParseException
+	 * @throws ParseException
 	 */
-	public Object parse(Reader in, ContainerFactory containerFactory) throws IOException, com.johnymuffin.beta.legacyping.simplejson.parser.ParseException {
+	public Object parse(Reader in, ContainerFactory containerFactory) throws IOException, ParseException {
 		reset(in);
 		LinkedList statusStack = new LinkedList();
 		LinkedList valueStack = new LinkedList();
@@ -143,7 +143,7 @@ public class JSONParser {
 					if(token.type==Yytoken.TYPE_EOF)
 						return valueStack.removeFirst();
 					else
-						throw new com.johnymuffin.beta.legacyping.simplejson.parser.ParseException(getPosition(), com.johnymuffin.beta.legacyping.simplejson.parser.ParseException.ERROR_UNEXPECTED_TOKEN, token);
+						throw new ParseException(getPosition(), ParseException.ERROR_UNEXPECTED_TOKEN, token);
 					
 				case S_IN_OBJECT:
 					switch(token.type){
@@ -251,10 +251,10 @@ public class JSONParser {
 					}//inner switch
 					break;
 				case S_IN_ERROR:
-					throw new com.johnymuffin.beta.legacyping.simplejson.parser.ParseException(getPosition(), com.johnymuffin.beta.legacyping.simplejson.parser.ParseException.ERROR_UNEXPECTED_TOKEN, token);
+					throw new ParseException(getPosition(), ParseException.ERROR_UNEXPECTED_TOKEN, token);
 				}//switch
 				if(status==S_IN_ERROR){
-					throw new com.johnymuffin.beta.legacyping.simplejson.parser.ParseException(getPosition(), com.johnymuffin.beta.legacyping.simplejson.parser.ParseException.ERROR_UNEXPECTED_TOKEN, token);
+					throw new ParseException(getPosition(), ParseException.ERROR_UNEXPECTED_TOKEN, token);
 				}
 			}while(token.type!=Yytoken.TYPE_EOF);
 		}
@@ -262,10 +262,10 @@ public class JSONParser {
 			throw ie;
 		}
 		
-		throw new com.johnymuffin.beta.legacyping.simplejson.parser.ParseException(getPosition(), com.johnymuffin.beta.legacyping.simplejson.parser.ParseException.ERROR_UNEXPECTED_TOKEN, token);
+		throw new ParseException(getPosition(), ParseException.ERROR_UNEXPECTED_TOKEN, token);
 	}
 	
-	private void nextToken() throws com.johnymuffin.beta.legacyping.simplejson.parser.ParseException, IOException{
+	private void nextToken() throws ParseException, IOException{
 		token = lexer.yylex();
 		if(token == null)
 			token = new Yytoken(Yytoken.TYPE_EOF, null);
@@ -273,7 +273,7 @@ public class JSONParser {
 	
 	private Map createObjectContainer(ContainerFactory containerFactory){
 		if(containerFactory == null)
-			return new com.johnymuffin.beta.legacyping.simplejson.JSONObject();
+			return new JSONObject();
 		Map m = containerFactory.createObjectContainer();
 		
 		if(m == null)
@@ -283,7 +283,7 @@ public class JSONParser {
 	
 	private List createArrayContainer(ContainerFactory containerFactory){
 		if(containerFactory == null)
-			return new com.johnymuffin.beta.legacyping.simplejson.JSONArray();
+			return new JSONArray();
 		List l = containerFactory.creatArrayContainer();
 		
 		if(l == null)
@@ -291,11 +291,11 @@ public class JSONParser {
 		return l;
 	}
 	
-	public void parse(String s, ContentHandler contentHandler) throws com.johnymuffin.beta.legacyping.simplejson.parser.ParseException {
+	public void parse(String s, ContentHandler contentHandler) throws ParseException {
 		parse(s, contentHandler, false);
 	}
 	
-	public void parse(String s, ContentHandler contentHandler, boolean isResume) throws com.johnymuffin.beta.legacyping.simplejson.parser.ParseException {
+	public void parse(String s, ContentHandler contentHandler, boolean isResume) throws ParseException {
 		StringReader in=new StringReader(s);
 		try{
 			parse(in, contentHandler, isResume);
@@ -304,11 +304,11 @@ public class JSONParser {
 			/*
 			 * Actually it will never happen.
 			 */
-			throw new com.johnymuffin.beta.legacyping.simplejson.parser.ParseException(-1, com.johnymuffin.beta.legacyping.simplejson.parser.ParseException.ERROR_UNEXPECTED_EXCEPTION, ie);
+			throw new ParseException(-1, ParseException.ERROR_UNEXPECTED_EXCEPTION, ie);
 		}
 	}
 	
-	public void parse(Reader in, ContentHandler contentHandler) throws IOException, com.johnymuffin.beta.legacyping.simplejson.parser.ParseException {
+	public void parse(Reader in, ContentHandler contentHandler) throws IOException, ParseException {
 		parse(in, contentHandler, false);
 	}
 	
@@ -324,9 +324,9 @@ public class JSONParser {
 	 *                   If this method is called for the first time in this instance, isResume will be ignored.
 	 * 
 	 * @throws IOException
-	 * @throws com.johnymuffin.beta.legacyping.simplejson.parser.ParseException
+	 * @throws ParseException
 	 */
-	public void parse(Reader in, ContentHandler contentHandler, boolean isResume) throws IOException, com.johnymuffin.beta.legacyping.simplejson.parser.ParseException {
+	public void parse(Reader in, ContentHandler contentHandler, boolean isResume) throws IOException, ParseException {
 		if(!isResume){
 			reset(in);
 			handlerStatusStack = new LinkedList();
@@ -380,7 +380,7 @@ public class JSONParser {
 					}
 					else{
 						status = S_IN_ERROR;
-						throw new com.johnymuffin.beta.legacyping.simplejson.parser.ParseException(getPosition(), com.johnymuffin.beta.legacyping.simplejson.parser.ParseException.ERROR_UNEXPECTED_TOKEN, token);
+						throw new ParseException(getPosition(), ParseException.ERROR_UNEXPECTED_TOKEN, token);
 					}
 			
 				case S_IN_OBJECT:
@@ -503,10 +503,10 @@ public class JSONParser {
 					return;
 					
 				case S_IN_ERROR:
-					throw new com.johnymuffin.beta.legacyping.simplejson.parser.ParseException(getPosition(), com.johnymuffin.beta.legacyping.simplejson.parser.ParseException.ERROR_UNEXPECTED_TOKEN, token);
+					throw new ParseException(getPosition(), ParseException.ERROR_UNEXPECTED_TOKEN, token);
 				}//switch
 				if(status==S_IN_ERROR){
-					throw new com.johnymuffin.beta.legacyping.simplejson.parser.ParseException(getPosition(), com.johnymuffin.beta.legacyping.simplejson.parser.ParseException.ERROR_UNEXPECTED_TOKEN, token);
+					throw new ParseException(getPosition(), ParseException.ERROR_UNEXPECTED_TOKEN, token);
 				}
 			}while(token.type!=Yytoken.TYPE_EOF);
 		}
@@ -514,7 +514,7 @@ public class JSONParser {
 			status = S_IN_ERROR;
 			throw ie;
 		}
-		catch(com.johnymuffin.beta.legacyping.simplejson.parser.ParseException pe){
+		catch(ParseException pe){
 			status = S_IN_ERROR;
 			throw pe;
 		}
@@ -528,6 +528,6 @@ public class JSONParser {
 		}
 		
 		status = S_IN_ERROR;
-		throw new com.johnymuffin.beta.legacyping.simplejson.parser.ParseException(getPosition(), ParseException.ERROR_UNEXPECTED_TOKEN, token);
+		throw new ParseException(getPosition(), ParseException.ERROR_UNEXPECTED_TOKEN, token);
 	}
 }

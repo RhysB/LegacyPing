@@ -1,4 +1,4 @@
-package com.johnymuffin.beta.legacyping.simplejson.parser;
+package com.johnymuffin.legacyping.simplejson.parser;
 
 import java.util.List;
 import java.util.Map;

@@ -2,10 +2,10 @@
  * $Id: JSONValue.java,v 1.1 2006/04/15 14:37:04 platform Exp $
  * Created on 2006-4-15
  */
-package com.johnymuffin.beta.legacyping.simplejson;
+package com.johnymuffin.legacyping.simplejson;
 
-import com.johnymuffin.beta.legacyping.simplejson.parser.JSONParser;
-import com.johnymuffin.beta.legacyping.simplejson.parser.ParseException;
+import com.johnymuffin.legacyping.simplejson.parser.JSONParser;
+import com.johnymuffin.legacyping.simplejson.parser.ParseException;
 
 import java.io.*;
 import java.util.Collection;

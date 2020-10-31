@@ -1,4 +1,4 @@
-package com.johnymuffin.beta.legacyping.simplejson.parser;
+package com.johnymuffin.legacyping.simplejson.parser;
 
 /**
  * ParseException explains why and where the error occurs in source JSON text.

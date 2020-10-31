@@ -1,4 +1,4 @@
-package com.johnymuffin.beta.legacyping.simplejson.parser;
+package com.johnymuffin.legacyping.simplejson.parser;
 
 import java.io.IOException;
 
@@ -15,37 +15,37 @@ public interface ContentHandler {
 	 * Receive notification of the beginning of JSON processing.
 	 * The parser will invoke this method only once.
      * 
-	 * @throws com.johnymuffin.beta.legacyping.simplejson.parser.ParseException
+	 * @throws ParseException
 	 * 			- JSONParser will stop and throw the same exception to the caller when receiving this exception.
 	 */
-	void startJSON() throws com.johnymuffin.beta.legacyping.simplejson.parser.ParseException, IOException;
+	void startJSON() throws ParseException, IOException;
 	
 	/**
 	 * Receive notification of the end of JSON processing.
 	 * 
-	 * @throws com.johnymuffin.beta.legacyping.simplejson.parser.ParseException
+	 * @throws ParseException
 	 */
-	void endJSON() throws com.johnymuffin.beta.legacyping.simplejson.parser.ParseException, IOException;
+	void endJSON() throws ParseException, IOException;
 	
 	/**
 	 * Receive notification of the beginning of a JSON object.
 	 * 
 	 * @return false if the handler wants to stop parsing after return.
-	 * @throws com.johnymuffin.beta.legacyping.simplejson.parser.ParseException
+	 * @throws ParseException
      *          - JSONParser will stop and throw the same exception to the caller when receiving this exception.
      * @see #endJSON
 	 */
-	boolean startObject() throws com.johnymuffin.beta.legacyping.simplejson.parser.ParseException, IOException;
+	boolean startObject() throws ParseException, IOException;
 	
 	/**
 	 * Receive notification of the end of a JSON object.
 	 * 
 	 * @return false if the handler wants to stop parsing after return.
-	 * @throws com.johnymuffin.beta.legacyping.simplejson.parser.ParseException
+	 * @throws ParseException
      * 
      * @see #startObject
 	 */
-	boolean endObject() throws com.johnymuffin.beta.legacyping.simplejson.parser.ParseException, IOException;
+	boolean endObject() throws ParseException, IOException;
 	
 	/**
 	 * Receive notification of the beginning of a JSON object entry.
@@ -53,41 +53,41 @@ public interface ContentHandler {
 	 * @param key - Key of a JSON object entry. 
 	 * 
 	 * @return false if the handler wants to stop parsing after return.
-	 * @throws com.johnymuffin.beta.legacyping.simplejson.parser.ParseException
+	 * @throws ParseException
      * 
      * @see #endObjectEntry
 	 */
-	boolean startObjectEntry(String key) throws com.johnymuffin.beta.legacyping.simplejson.parser.ParseException, IOException;
+	boolean startObjectEntry(String key) throws ParseException, IOException;
 	
 	/**
 	 * Receive notification of the end of the value of previous object entry.
 	 * 
 	 * @return false if the handler wants to stop parsing after return.
-	 * @throws com.johnymuffin.beta.legacyping.simplejson.parser.ParseException
+	 * @throws ParseException
      * 
      * @see #startObjectEntry
 	 */
-	boolean endObjectEntry() throws com.johnymuffin.beta.legacyping.simplejson.parser.ParseException, IOException;
+	boolean endObjectEntry() throws ParseException, IOException;
 	
 	/**
 	 * Receive notification of the beginning of a JSON array.
 	 * 
 	 * @return false if the handler wants to stop parsing after return.
-	 * @throws com.johnymuffin.beta.legacyping.simplejson.parser.ParseException
+	 * @throws ParseException
      * 
      * @see #endArray
 	 */
-	boolean startArray() throws com.johnymuffin.beta.legacyping.simplejson.parser.ParseException, IOException;
+	boolean startArray() throws ParseException, IOException;
 	
 	/**
 	 * Receive notification of the end of a JSON array.
 	 * 
 	 * @return false if the handler wants to stop parsing after return.
-	 * @throws com.johnymuffin.beta.legacyping.simplejson.parser.ParseException
+	 * @throws ParseException
      * 
      * @see #startArray
 	 */
-	boolean endArray() throws com.johnymuffin.beta.legacyping.simplejson.parser.ParseException, IOException;
+	boolean endArray() throws ParseException, IOException;
 	
 	/**
 	 * Receive notification of the JSON primitive values:
@@ -103,7 +103,7 @@ public interface ContentHandler {
 	 * 			null
 	 * 
 	 * @return false if the handler wants to stop parsing after return.
-	 * @throws com.johnymuffin.beta.legacyping.simplejson.parser.ParseException
+	 * @throws ParseException
 	 */
 	boolean primitive(Object value) throws ParseException, IOException;
 		

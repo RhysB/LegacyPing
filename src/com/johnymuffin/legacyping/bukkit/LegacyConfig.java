@@ -1,14 +1,15 @@
-package com.johnymuffin.beta.legacyping;
+package com.johnymuffin.legacyping.bukkit;
 
+import com.johnymuffin.legacyping.LPSettings;
 import org.bukkit.Bukkit;
 import org.bukkit.util.config.Configuration;
 
 import java.io.File;
 
-public class LegacyConfig extends Configuration {
-    private LegacyPing plugin;
+public class LegacyConfig extends Configuration implements LPSettings {
+    private LegacyPingBukkit plugin;
 
-    public LegacyConfig(LegacyPing plugin) {
+    public LegacyConfig(LegacyPingBukkit plugin) {
         super(new File(plugin.getDataFolder(), "config.yml"));
         this.plugin = plugin;
         this.reload();
@@ -19,7 +20,7 @@ public class LegacyConfig extends Configuration {
         //Main
         generateConfigOption("config-version", 1);
         //Setting
-        generateConfigOption("query-port", Bukkit.getServer().getPort() + 1);
+        generateConfigOption("query-port", (Bukkit.getServer().getPort() + 1));
         generateConfigOption("show-players", true);
         generateConfigOption("show-players-coordinates", true);
         generateConfigOption("show-worlds", true);
@@ -74,4 +75,31 @@ public class LegacyConfig extends Configuration {
     }
 
 
+    public int getPort() {
+        return getConfigInteger("query-port");
+    }
+
+    public String getVersion() {
+        return plugin.getDescription().getVersion();
+    }
+
+    public boolean showPlayers() {
+        return getConfigBoolean("show-players");
+    }
+
+    public boolean showCoordinates() {
+        return getConfigBoolean("show-players-coordinates");
+    }
+
+    public boolean showWorlds() {
+        return getConfigBoolean("show-worlds");
+    }
+
+    public boolean showPlugins() {
+        return getConfigBoolean("show-plugins");
+    }
+
+    public boolean showPluginVersions() {
+        return getConfigBoolean("show-plugins-versions");
+    }
 }

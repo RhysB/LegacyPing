@@ -1,4 +1,4 @@
-package com.johnymuffin.beta.legacyping.simplejson;
+package com.johnymuffin.legacyping.simplejson;
 
 import java.io.IOException;
 import java.io.Writer;
